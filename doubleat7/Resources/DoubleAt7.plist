@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>This e-mail address will be substituted when the @ key is tapped twice.</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.ryst.doubleat7</string>
+			<key>key</key>
+			<string>Enabled</string>
+			<key>label</key>
+			<string>Enabled</string>
+			<key>PostNotification</key>
+			<string>com.ryst.doubleat7.preferencesChanged</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSEditTextCell</string>
+			<key>default</key>
+			<string></string>
+			<key>defaults</key>
+			<string>com.ryst.doubleat7</string>
+			<key>key</key>
+			<string>EmailAddress</string>
+			<key>label</key>
+			<string>E-mail</string>
+			<key>isEmail</key>
+			<true/>
+			<key>placeholder</key>
+			<string>name@company.com</string>
+			<key>PostNotification</key>
+			<string>com.ryst.doubleat7.preferencesChanged</string>
+		</dict>
+	</array>
+	<key>title</key>
+	<string>DoubleAt</string>
+</dict>
+</plist>

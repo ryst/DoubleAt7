@@ -1,0 +1,10 @@
+{
+    entry = {
+	bundle = DoubleAt7;
+	cell = PSLinkCell;
+	detail = DoubleAt7ListController;
+	icon = DoubleAt7.png;
+	isController = 1;
+	label = DoubleAt;
+    };
+}
