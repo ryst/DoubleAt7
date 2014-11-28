@@ -8,7 +8,6 @@ static NSString* email = @"";
 static BOOL enabled = NO;
 
 static NSTimeInterval timeLast = 0;
-static NSInteger offsetLast = 0;
 
 static void loadPreferences() {
 	NSString* preferencesPlist = @"/var/mobile/Library/Preferences/com.ryst.doubleat7.plist";
@@ -47,46 +46,24 @@ static void receivedNotification(CFNotificationCenterRef center, void *observer,
 		id<UITextInput> delegate = (id<UITextInput>)self.delegate;
 
 		NSTimeInterval time = [NSDate timeIntervalSinceReferenceDate];
-		UITextRange* range = delegate.selectedTextRange;
-		NSInteger start = [delegate offsetFromPosition:delegate.beginningOfDocument toPosition:range.start];
 
-		if (time - timeLast > 1.0 || start == 0 || start != offsetLast + 1) {
+		if (time - timeLast > 1.0) {
 
 			// This is the first @ character
 			timeLast = time;
-			offsetLast = start;
 
 		} else {
 
 			// This is the second @ character
-			UITextPosition* replaceStart = [delegate positionFromPosition:range.start offset:-1];
-			UITextRange* replaceRange = [delegate textRangeFromPosition:replaceStart toPosition:range.start];
-			NSString* s = [delegate textInRange:replaceRange];
+			[delegate deleteBackward];
+			%orig(email);
 
-			if ([s isEqualToString:@"@"]) { // Just to be sure that the first @ character is there!
-				NSString* firstPart;
-				NSString* secondPart;
-				if (email.length > 1) {
-					firstPart = [email substringToIndex:email.length - 1];
-					secondPart = [email substringFromIndex:email.length - 1];
-				} else {
-					firstPart = @"";
-					secondPart = email;
-				}
+			timeLast = 0;
+			return;
 
-				[delegate replaceRange:replaceRange withText:firstPart];
-
-				%orig(secondPart);
-
-				return;
-			} else {
-				timeLast = 0;
-				offsetLast = 0;
-			}
 		}
 	} else {
 		timeLast = 0;
-		offsetLast = 0;
 	}
 	
 	%orig;
